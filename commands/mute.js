@@ -42,7 +42,7 @@ module.exports = {
         })
 }
 
-        member.send(`You were muted in the server **${message.guild}** by ${message.author}, reason: ${reason}`)
+        member.send(`You were muted in the server **${message.guild}** for **${$time}** by ${message.author}, reason: ${reason}`)
         member.roles.add(muterole)
         const banembed = new Discord.MessageEmbed()
             .setTitle('Member Muted')
