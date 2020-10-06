@@ -3,8 +3,8 @@ const ms = require('ms')
 
 module.exports = {
     commands: ['mute'],
+    expectedArgs: '<user> <time> <reason>',
     minArgs: 3,
-    maxArgs: 3,
     callback: async (message, client, arguments, text) => {
         if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send(`You don\'t have permission to use this command.`)
         if(!message.guild.me.hasPermission("MUTE_MEMBERS")) return message.channel.send(`I don\'t have permission to mute. Please give me mute members permission.`)

@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 
 module.exports = {
     commands: ['ban'],
+    expectedArgs: '<user> <reason>',
     minArgs: 2,
-    maxArgs: 2,
     callback: (message, client, arguments, text) => {
         if (!message.member.hasPermission("BAN_MEMBERS" || "ADMINISTRATOR")) return;
         if (!message.guild.me.hasPermission("BAN_MEMBERS" || "ADMINISTRATOR")) return message.channel.send('I don\'t have the right permissions to ban. Please grant me ban permissions.')

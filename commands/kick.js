@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 
 module.exports = {
     commands: ['kick'],
+    expectedArgs: '<user> <reason>',
     minArgs: 2,
-    maxArgs: 2,
     callback: (message, client, arguments, text) => {
         if (!message.member.hasPermission("KICK_MEMBERS" || "ADMINISTRATOR")) return;
         if (!message.guild.me.hasPermission("KICK_MEMBERS" || "ADMINISTRATOR")) return message.channel.send('I don\'t have the right permissions to kick. Please grant me kick permissions.')
