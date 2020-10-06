@@ -3,7 +3,6 @@ const ms = require('ms')
 
 module.exports = {
     commands: ['mute'],
-    expectedArgs: '<user> <time> <reason>',
     minArgs: 3,
     maxArgs: 3,
     callback: async (message, client, arguments, text) => {

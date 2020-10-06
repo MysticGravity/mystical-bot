@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 
 module.exports = {
     commands: ['ban'],
-    expectedArgs: '<user> <reason>',
     minArgs: 2,
     maxArgs: 2,
     callback: (message, client, arguments, text) => {
