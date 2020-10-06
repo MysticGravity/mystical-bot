@@ -57,7 +57,10 @@ module.exports = {
 
         message.channel.send(banembed);
 
-        setTimeout(function(){
+        
+            if(!member.roles.cache.find(role => role.name == 'Muted')) {
+                return;
+            } else setTimeout(function(){
             member.roles.remove(muterole);
             member.send(`You were unmuted in the server **${message.guild}**.`)
             message.channel.send(`${member} has been unmuted.`)
