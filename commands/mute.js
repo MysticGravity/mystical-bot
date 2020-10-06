@@ -56,15 +56,15 @@ module.exports = {
             .setTimestamp()
 
         message.channel.send(banembed);
-
-        
-            if(!member.roles.cache.find(role => role.name == 'Muted')) {
-                return;
-            } else setTimeout(function(){
+            setTimeout(function(){
             member.roles.remove(muterole);
-            member.send(`You were unmuted in the server **${message.guild}**.`)
-            message.channel.send(`${member} has been unmuted.`)
+            if(member.roles.cache.find(role => role.name == 'Muted')) {
+                member.send(`You were unmuted in the server **${message.guild}**.`)
+                message.channel.send(`${member} has been unmuted.`)
+            } else
+            return;
         }, ms(time));
+    
     },
     permissions: ['MUTE_MEMBERS']
 }
