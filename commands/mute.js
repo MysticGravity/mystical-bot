@@ -23,7 +23,7 @@ module.exports = {
         if(!reason) return message.reply('Please enter a reason to mute this user.')
         if(!time) return message.reply('Please enter a time you want to mute the user for. s = seconds m = minutes h = hours d = days. Example: .mute user 10s test');
         if(!muterole) {
-            message.channel.send('I could not find a role called "Muted". I will create the role. When done please reissue the command.');
+            message.channel.send('I could not find a role called "Muted". I will create the role and mute the user when done.');
             muterole = await message.guild.roles.create({
             data:{
                 name: "Muted",
