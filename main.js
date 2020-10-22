@@ -28,4 +28,4 @@ client.on('ready', async () => {
   readCommands('commands')
 })
 
-client.login(process.env.token) 
+client.login(config.token) 
