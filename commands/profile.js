@@ -1,9 +1,6 @@
 const Discord = require('discord.js');
 module.exports = {
     commands: ['profile'],
-    expectedArgs: '<user>',
-    minArgs: 1,
-    maxArgs: 1,
     callback: async (message, client, arguments, text) => {
       let user = message.mentions.members.first() || message.guild.members.cache.get(arguments[0]) || message.member;
 

@@ -8,8 +8,7 @@ module.exports = {
         if (!message.member.hasPermission("KICK_MEMBERS" || "ADMINISTRATOR")) return;
         if (!message.guild.me.hasPermission("KICK_MEMBERS" || "ADMINISTRATOR")) return message.channel.send('I don\'t have the right permissions to kick. Please grant me kick permissions.')
 
-        const member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0]);
-
+        let user = message.mentions.users.first() || message.guild.members.cache.get(arguments[0]);
         if (!arguments[0]) return message.channel.send('Please specify a user!');
 
         if (!member) return message.channel.send('I can\'t find the user you are trying to kick!');

@@ -8,7 +8,7 @@ module.exports = {
         if (!message.member.hasPermission("BAN_MEMBERS" || "ADMINISTRATOR")) return;
         if (!message.guild.me.hasPermission("BAN_MEMBERS" || "ADMINISTRATOR")) return message.channel.send('I don\'t have the right permissions to ban. Please grant me ban permissions.')
         
-        const member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0]);
+        let member = message.mentions.users.first() || message.guild.members.cache.get(arguments[0]);
 
         if (!arguments[0]) return message.channel.send('Please specify a user!');
 
@@ -22,7 +22,7 @@ module.exports = {
         if (!reason) return message.channel.send('Please provide a reason.');
 
         member.send(`You were banned from the server **${message.guild}** by ${message.author}, reason: ${reason}`)
-        member.ban()
+        message.member.ban()
             .catch(err => {
                 if (err) return message.channel.send('Something went wrong.')
             })

@@ -1,16 +1,13 @@
 const Discord = require('discord.js');
 module.exports = {
     commands: ['avatar', 'av'],
-    expectedArgs: '<user>',
-    minArgs: 1,
-    maxArgs: 1,
     callback: (message, client, arguments, text) => {
         let user;
   
         if (message.mentions.users.first()) {
           user = message.mentions.users.first();
-        } else if (args[0]) {
-          user = message.guild.members.cache.get(args[0]).user;
+        } else if (arguments[0]) {
+          user = message.guild.members.cache.get(arguments[0]).user;
         } else {
           user = message.author;
         }

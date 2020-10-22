@@ -8,7 +8,7 @@ module.exports = {
     callback: async (message, client, arguments, text) => {
         if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send(`You don\'t have permission to use this command.`)
         if(!message.guild.me.hasPermission("MUTE_MEMBERS")) return message.channel.send(`I don\'t have permission to mute. Please give me mute members permission.`)
-        const member = message.mentions.members.first() || message.guild.members.cache.get(arguments[1]);
+        let member = message.mentions.users.first() || message.guild.members.cache.get(arguments[0]);
         if (!arguments[0]) return message.channel.send('Please specify a user!');
 
         if (!member) return message.channel.send('I can\'t find the user you are trying to mute!');
