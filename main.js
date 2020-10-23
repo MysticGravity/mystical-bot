@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const Discord = require('discord.js');
+const mongoose = require('mongoose');
 const client = new Discord.Client().setMaxListeners(100);
 
 const config = require('./config.json')
