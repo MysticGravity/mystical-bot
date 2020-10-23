@@ -1,4 +1,14 @@
-const { prefix } = require('../config.json')
+/**
+ * NOTE:
+ *  Some parts of this code have been improved since the original command base video.
+ *  This file should still work as expected, however if you are learning the inner workings of
+ *  this file then expect the file to be slightly different than in the video.
+ */
+
+const mongo = require('../mongoose')
+const commandPrefixSchema = require('../schemas/command-prefix-schema')
+const { prefix: globalPrefix } = require('../config.json')
+const guildPrefixes = {} // { 'guildId' : 'prefix' }
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
@@ -71,8 +81,10 @@ module.exports = (client, commandOptions) => {
   }
 
   // Listen for messages
-  client.on('message', (message) => {
+  client.on('message', async (message) => {
     const { member, content, guild } = message
+
+    const prefix = guildPrefixes[guild.id] || globalPrefix
 
     for (const alias of commands) {
       const command = `${prefix}${alias.toLowerCase()}`
@@ -91,27 +103,11 @@ module.exports = (client, commandOptions) => {
           }
         }
 
-        // Ensure the user has the required roles
-        for (const requiredRole of requiredRoles) {
-          const role = guild.roles.cache.find(
-            (role) => role.name === requiredRole
-          )
-
-          if (!role || !member.roles.cache.has(role.id)) {
-            message.reply(
-              `You must have the "${requiredRole}" role to use this command.`
-            )
-            return
-          }
-        }
-
-        // Split on any number of spaces
         const arguments = content.split(/[ ]+/)
 
-        // Remove the command which is the first index
+     
         arguments.shift()
 
-        // Ensure we have the correct number of arguments
         if (
           arguments.length < minArgs ||
           (maxArgs !== null && arguments.length > maxArgs)
@@ -122,8 +118,7 @@ module.exports = (client, commandOptions) => {
           return
         }
 
-        // Handle the custom command code
-        callback(message, client, arguments, arguments.join(' '), client)
+        callback(message, arguments, arguments.join(' '), client)
 
         return
       }
@@ -131,4 +126,23 @@ module.exports = (client, commandOptions) => {
   })
 }
 
-//
+module.exports.updateCache = (guildId, newPrefix) => {
+  guildPrefixes[guildId] = newPrefix
+}
+
+module.exports.loadPrefixes = async (client) => {
+  await mongo().then(async (mongoose) => {
+    try {
+      for (const guild of client.guilds.cache) {
+        const guildId = guild[1].id
+
+        const result = await commandPrefixSchema.findOne({ _id: guildId })
+        guildPrefixes[guildId] = result.prefix
+      }
+
+      console.log(guildPrefixes)
+    } finally {
+      mongoose.connection.close()
+    }
+  })
+}
