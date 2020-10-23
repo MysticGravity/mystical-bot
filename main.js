@@ -1,11 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 const Discord = require('discord.js');
-const mongoose = require('mongoose');
 const client = new Discord.Client().setMaxListeners(100);
 
 const config = require('./config.json')
 const { setMaxListeners } = require('process')
+const levels = require('./features/levels')
 
 
 client.on('ready', async () => {
@@ -28,6 +28,7 @@ client.on('ready', async () => {
   }
 
   readCommands('commands')
+  levels(client)
 })
 
 client.login(config.token) 
