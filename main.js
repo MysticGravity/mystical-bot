@@ -27,9 +27,8 @@ client.on('ready', async () => {
       }
     }
   }
-
-  readCommands('commands')
   levels(client)
+  readCommands('commands')
 })
 
 client.login(config.token) 

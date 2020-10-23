@@ -1,5 +1,5 @@
 {
     "token": "NzYwMzA3MDM5OTAxMDU3MTA0.X3KJHA.C9SS2cnTGek_EYDkp6DeFJJNDm4",
     "prefix": ".",
-    "mongoPath": "mongodb+srv://Mystic:mahesh21@mysticalbot.vpi49.mongodb.net/test"
+    "mongoPath": "mongodb://localhost:27017/discordbot"
   }
